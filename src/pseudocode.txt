@@ -38,3 +38,15 @@ while(true) {
 Create computer that fires randomly.
 
 
+Colors: 
+Grid borders: #002C66
+Grid squares: #2389DA
+Text: #FFFFFF
+Main background: #303030
+Header background: #3D3D3D
+Red when ship is hit but not sunk: #D16060
+Red when ship is sunk: #F82727
+Grey boats: #808080
+Grey boats border: #464646
+
+

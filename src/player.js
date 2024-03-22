@@ -31,11 +31,20 @@ const Player = function () {
     return false;
   };
 
-  const randomAttack = function () {
-    
+  const randomAttack = function (player) {
+    let x;
+    let y;
+    while (true) {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+      if (typeof player.getGrid()[x][y] === 'object') {
+        break;
+      }
+    }
+    return attack(player, x, y);
   };
 
-  return { allSunk, placeShip, getGrid, receiveHit, attack, win };
+  return { allSunk, placeShip, getGrid, receiveHit, attack, win, randomAttack };
 };
 
 export default Player;

@@ -25,7 +25,6 @@ const Gameboard = function createGameboard() {
   };
   const receiveHit = function (x, y) {
     const value = grid[x][y];
-    console.log('value', value);
     if (value === null) {
       grid[x][y] = 'water';
       return 'water';

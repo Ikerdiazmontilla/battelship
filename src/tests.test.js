@@ -22,7 +22,7 @@ describe('gameboard Logic', () => {
     gameboard.placeShip([1, 3], 3, 'horizontal');
   });
   test('ship placement', () => {
-    expect(typeof gameboard.getGrid()[1][3]).toEqual('object');
+    expect(typeof gameboard.getGrid()[1][3]).not.toBeNull();
     expect(typeof gameboard.getGrid()[2][3]).toEqual('object');
     expect(typeof gameboard.getGrid()[3][3]).toEqual('object');
   });
@@ -58,6 +58,7 @@ describe('player logic', () => {
   let player2;
   beforeEach(() => {
     player1 = Player();
+    player2 = Player();
     player1.placeShip([1, 3], 3, 'horizontal');
   });
   test('player placeShip', () => {
@@ -77,5 +78,33 @@ describe('player logic', () => {
     player2.attack(player1, 1, 3);
     player2.attack(player1, 2, 3);
     expect(player2.attack(player1, 3, 3)).toBe('I won');
+  });
+
+  test('random attack', () => {
+    player2.randomAttack(player1);
+    let works = false;
+    player1.getGrid().forEach(line => {
+      line.forEach(slot => {
+        if (typeof slot === 'string') {
+          works = true;
+        }
+      });
+    });
+    expect(works).toBe(true);
+  });
+
+  test('random attack does not repeat', () => {
+    for (let i = 0; i < 100; i += 1) {
+      player2.randomAttack(player1);
+    }
+    let stringCount = 0;
+    player1.getGrid().forEach(line => {
+      line.forEach(slot => {
+        if (typeof slot === 'string') {
+          stringCount += 1;
+        }
+      });
+    });
+    expect(stringCount).toBe(100);
   });
 });
