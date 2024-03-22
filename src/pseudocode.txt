@@ -1,0 +1,40 @@
+Ships:
+length : num
+Hits : num
+Sunk : true/false ? 
+Function addHit => this.hits += 1
+isSunk() hits === length ? return true : return false
+
+
+Gameboard:
+array: 10x10
+Place ship(starting coordinate ,length, vertical/horizontal) => substitute null in the coordinates ship object. 
+Receive hit(x,y) => if(array[x][y]) => ship.addHit(), array [x][y] = "hit", return ship
+else array[x][y] = "water" , return watera
+
+allSunk(array.forEach(line) line.forEach(slot) if typeof slot === object return false)
+
+Players:
+two Players
+Player has gameboard as a property
+player.placeShip() triggers gameboard.placeShip()
+player.receiveHit() triggers gameboard.receiveHit()
+player.attack() triggers player.receiveHit()
+player.win() console.log('win')
+
+player.attack() {
+  opponent.receiveHit()
+  if(opponent.gameboard.allSunk){
+    player.win()
+  }
+}
+while(true) {
+  player1 attack();
+   if(gameboard2.allSunk) break
+   player2 attack()
+  if(gameboard1.allSunk) break
+}
+
+Create computer that fires randomly.
+
+
