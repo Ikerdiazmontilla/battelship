@@ -1,0 +1,220 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+ }
+ 
+
+* {
+margin: 0;
+padding: 0;
+}
+
+
+body {
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+font-family: 'Rubik Bubbles', Courier, monospace;
+}
+
+
+img, picture, video, canvas, svg {
+display: block;
+max-width: 100%;
+}
+
+
+input, button, textarea, select {
+font: inherit;
+}
+
+
+p, h1, h2, h3, h4, h5, h6 {
+overflow-wrap: break-word;
+}
+
+
+button, a{
+cursor: pointer;
+}
+
+
+a{
+   text-decoration: none;
+}
+
+
+
+
+/* Footer */
+
+
+html {
+/* footer support */
+position: relative;
+min-height: 100%;
+}
+
+
+body {
+/* footer support */
+margin-bottom: 48px;
+}
+
+
+.footer {
+position: absolute;
+bottom: 0;
+left: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+width: 100%;
+padding: 10px;
+background-color: black;
+color: white;
+font-size: 18px;
+}
+
+
+.fa-github {
+color: white;
+font-size: 22px;
+transition: transform 0.3s ease-in-out;
+}
+
+
+.fa-github:hover {
+transform: rotate(360deg) scale(1.2);
+}
+
+/* Styling */
+
+:root{
+ --header-bg: #3D3D3D;
+ --main-bg:#303030;
+ --text:#FFFFFF;
+ --grid-borders:#002C66;
+ --grid-squares:#2389DA;
+ --my-boats:#808080;
+ --my-boats-border:#464646;
+ --ship-hit:#F82727;
+ --ship-sunk:#D16060;
+ --green-text:#2BC557;
+ --red-text:#E23636;
+}
+
+body {
+   color: var(--text);
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+header{
+   padding: 2vh 2vw;
+   display: flex;
+   align-items: center;
+   background-color: var(--header-bg);
+   flex: 1;
+}
+
+h1{
+   font-size: 2.5rem;
+   font-weight: 500;
+}
+
+main{
+   background-color: var(--main-bg);
+   flex: 7;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5vh;
+   padding: 5vh 0px;
+}
+
+.turns{
+   padding: 10px 30px;
+   border: 2px ridge var(--green-text);
+   color: var(--green-text);
+   font-size: 2rem;;
+   border-radius: 10px;
+}
+
+.grid-container{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10vw;
+}
+
+.wrapper{
+   display:flex;
+   flex-direction: column;
+}
+
+.grid {
+   display: flex;
+   aspect-ratio: 1/1;
+   height: 70vh;
+   border: 3px solid var(--grid-borders);
+   border-radius: 6px;
+}
+
+.line{
+   display: flex;
+   flex-direction: column;
+   width: 10%;
+   height: 100%;
+}
+
+.square{
+   background-color: var(--grid-squares);
+   border: 2px solid var(--grid-borders);
+   width: 100%;
+   height: 10%;
+}
+.square.ship{
+   background-color: var(--my-boats);
+   border: 4px solid var(--my-boats-border);
+   border-radius: 8px;
+}
+
+.square.water{
+   display: grid;
+   place-content: center;
+   font-size: 2rem;
+}
+
+.square.hit {
+   background-color: var(--ship-hit);
+   border: 4px solid var(--my-boats-border);
+   display: grid;
+   place-content: center;
+   font-size: 3rem;
+   font-weight: 800;
+}
+
+.square.sunk {
+   background-color: var(--ship-sunk);
+   border: 4px solid var(--my-boats-border);
+   display: grid;
+   place-content: center;
+   font-size: 3rem;
+   font-weight: 800;
+}
+
+.info{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: 1.5rem;
+   font-weight: 500;
+   color: var(--green-text);
+}
+
+.info.two{
+   color: var(--red-text);
+}
+
+

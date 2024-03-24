@@ -37,7 +37,7 @@ const Player = function () {
     while (true) {
       x = Math.floor(Math.random() * 10);
       y = Math.floor(Math.random() * 10);
-      if (typeof player.getGrid()[x][y] === 'object') {
+      if (typeof player.getGrid()[x][y] === 'object' && !Array.isArray(player.getGrid()[x][y])) {
         break;
       }
     }

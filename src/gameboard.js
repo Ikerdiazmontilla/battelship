@@ -30,7 +30,7 @@ const Gameboard = function createGameboard() {
       return 'water';
     }
     value.addHit();
-    grid[x][y] = 'hit';
+    grid[x][y] = ['hit', value];
     if (value.isSunk()) {
       return 'sunk';
     }
@@ -41,7 +41,7 @@ const Gameboard = function createGameboard() {
     let result = true;
     grid.forEach(line => {
       line.forEach(slot => {
-        if (slot !== null && typeof slot === 'object') result = false;
+        if (slot !== null && typeof slot === 'object' && !Array.isArray(slot)) result = false;
       });
     });
     return result;

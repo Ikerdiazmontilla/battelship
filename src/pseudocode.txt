@@ -49,4 +49,9 @@ Red when ship is sunk: #F82727
 Grey boats: #808080
 Grey boats border: #464646
 
+Font: rubik
+create dom module
+Populate Grid
+
+
 

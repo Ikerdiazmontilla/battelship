@@ -1,19 +1,33 @@
 import './style.css';
-// import Player from './player';
+import dom from './dom';
 
-// const player1 = Player();
-// const player2 = Player();
-// player1.placeShip([1, 3], 4, 'horizontal');
-// player1.placeShip([7, 3], 3, 'horizontal');
-// player1.placeShip([1, 3], 3, 'horizontal');
-// player1.placeShip([8, 8], 2, 'horizontal');
-// player1.placeShip([6, 4], 2, 'horizontal');
+import Player from './player';
 
-// player2.placeShip([1, 3], 4, 'horizontal');
-// player2.placeShip([7, 3], 3, 'horizontal');
-// player2.placeShip([8, 8], 2, 'horizontal');
-// player2.placeShip([6, 4], 2, 'horizontal');
+const player1 = Player();
+const player2 = Player();
+player1.placeShip([1, 3], 4, 'horizontal');
+player1.placeShip([7, 3], 3, 'horizontal');
+player1.placeShip([8, 8], 2, 'horizontal');
+player1.placeShip([1, 5], 2, 'vertical');
+player2.attack(player1, 1, 5);
+player2.attack(player1, 1, 6);
+player2.attack(player1, 1, 3);
+player2.attack(player1, 9, 9);
 
+dom.populateGrid(player1.getGrid());
+
+player2.placeShip([1, 3], 4, 'horizontal');
+player2.placeShip([7, 3], 3, 'horizontal');
+player2.placeShip([8, 8], 2, 'horizontal');
+player2.placeShip([1, 5], 2, 'vertical');
+player1.attack(player2, 1, 5);
+player1.attack(player2, 1, 6);
+player1.attack(player2, 1, 3);
+player1.attack(player2, 9, 9);
+
+dom.populateEnemyGrid(player2.getGrid());
+
+// dom.populateGrid(player2.getGrid(), 2);
 // let finish = false;
 // while (finish === false) {
 //   finish = player1.randomAttack(player2);

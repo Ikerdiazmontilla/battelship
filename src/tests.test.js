@@ -30,7 +30,7 @@ describe('gameboard Logic', () => {
   test('receive hit', () => {
     gameboard.receiveHit(1, 3);
     gameboard.receiveHit(2, 8);
-    expect(gameboard.getGrid()[1][3]).toBe('hit');
+    expect(gameboard.getGrid()[1][3][0]).toBe('hit');
     expect(gameboard.getGrid()[2][8]).toBe('water');
     expect(typeof gameboard.receiveHit(2, 3)).toEqual('object');
   });
@@ -66,12 +66,12 @@ describe('player logic', () => {
   });
   test('player receive hit', () => {
     player1.receiveHit(1, 3);
-    expect(player1.getGrid()[1][3]).toBe('hit');
+    expect(player1.getGrid()[1][3][0]).toBe('hit');
   });
   test('player attack', () => {
     player2 = Player();
     player2.attack(player1, 1, 3);
-    expect(player1.getGrid()[1][3]).toBe('hit');
+    expect(player1.getGrid()[1][3][0]).toBe('hit');
   });
   test('player attack calls win', () => {
     player2 = Player();
@@ -100,7 +100,7 @@ describe('player logic', () => {
     let stringCount = 0;
     player1.getGrid().forEach(line => {
       line.forEach(slot => {
-        if (typeof slot === 'string') {
+        if (typeof slot === 'string' || Array.isArray(slot)) {
           stringCount += 1;
         }
       });
