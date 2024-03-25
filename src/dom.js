@@ -67,14 +67,21 @@ const dom = {
     const clickedSquare = event.currentTarget;
     const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
     const indexX = Array.prototype.indexOf.call(enemyGrid.children, column);
-    dom.player1.attack(dom.player2, indexX, indexY);
+    let hit = dom.player1.attack(dom.player2, indexX, indexY);
     dom.populateEnemyGrid(dom.player1, dom.player2);
     if (dom.player2.allSunk() !== false) return dom.playerWon(1);
-    dom.toggleTurn();
-    dom.player2.randomAttack(dom.player1);
-    dom.populateGrid(dom.player1.getGrid());
-    if (dom.player1.allSunk() !== false) return dom.playerWon(2);
-    dom.toggleTurn();
+    if (hit === false) {
+      // dom.toggleTurn();
+      while (true) {
+        hit = dom.player2.randomAttack(dom.player1);
+        dom.populateGrid(dom.player1.getGrid());
+        if (dom.player1.allSunk() !== false) return dom.playerWon(2);
+        if (hit === false) {
+          // dom.toggleTurn();
+          break;
+        }
+      }
+    }
     return false;
   },
   playerWon(player) {

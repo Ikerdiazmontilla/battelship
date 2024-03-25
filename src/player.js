@@ -20,15 +20,15 @@ const Player = function () {
   };
 
   const receiveHit = function (x, y) {
-    gameboard.receiveHit(x, y);
+    return gameboard.receiveHit(x, y);
   };
 
   const attack = function (player, x, y) {
-    player.receiveHit(x, y);
+    const hit = player.receiveHit(x, y);
     if (player.allSunk()) {
       return win();
     }
-    return false;
+    return hit;
   };
 
   const randomAttack = function (player) {

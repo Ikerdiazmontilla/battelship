@@ -27,13 +27,10 @@ const Gameboard = function createGameboard() {
     const value = grid[x][y];
     if (value === null) {
       grid[x][y] = 'water';
-      return 'water';
+      return false;
     }
     value.addHit();
     grid[x][y] = ['hit', value];
-    if (value.isSunk()) {
-      return 'sunk';
-    }
     return value;
   };
 
