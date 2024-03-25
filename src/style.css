@@ -157,12 +157,52 @@ main{
    flex-direction: column;
 }
 
+.number-wrapper{
+   display: flex;
+   flex-direction: column;
+}
+
+.y-wrapper{
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+.y-coordinates{
+   display: flex;
+   flex-direction: column;
+   font-size: 1.5rem;
+   min-height: 70vh;
+   align-items: center;
+}
+
+.y-coordinates p{
+   height: 7vh;
+   text-align: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 .grid {
    display: flex;
    aspect-ratio: 1/1;
    height: 70vh;
    border: 3px solid var(--grid-borders);
    border-radius: 6px;
+}
+
+.x-coordinates{
+   display: flex;
+   width: 70vh;
+   align-self: flex-end;
+   font-size: 1.5rem;
+   justify-content: center;
+}
+
+.x-coordinates p{
+   width: 7vh;
+   text-align: center;
 }
 
 .line{
