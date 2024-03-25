@@ -25,15 +25,12 @@ player1.attack(player2, 1, 6);
 player1.attack(player2, 1, 3);
 player1.attack(player2, 9, 9);
 
-dom.populateEnemyGrid(player2.getGrid());
+dom.populateEnemyGrid(player1, player2);
 
-// dom.populateGrid(player2.getGrid(), 2);
+dom.populateGrid(player1.getGrid());
 // let finish = false;
 // while (finish === false) {
-//   finish = player1.randomAttack(player2);
-//   finish = player2.randomAttack(player1);
-//   console.log(player1.getGrid());
-//   console.log(player2.getGrid());
+//   finish = dom.listenForClick(player1, player2);
 // }
 
 // gameboard.receiveHit(1, 3);

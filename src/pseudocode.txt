@@ -50,8 +50,11 @@ Grey boats: #808080
 Grey boats border: #464646
 
 Font: rubik
-create dom module
-Populate Grid
+
+Create game loop
+Create function in dom to listen for a click and attack
+Populate grid after each attack
+create conditions to detect when the game finishes and display it
 
 
 

@@ -141,6 +141,10 @@ main{
    border-radius: 10px;
 }
 
+.turns.red {
+   color: var(--red-text);
+}
+
 .grid-container{
    display: flex;
    align-items: center;
@@ -174,6 +178,12 @@ main{
    width: 100%;
    height: 10%;
 }
+
+#grid2 .square.empty:hover{
+   background-color: rgb(141, 4, 141);
+   cursor:crosshair;
+}
+
 .square.ship{
    background-color: var(--my-boats);
    border: 4px solid var(--my-boats-border);
