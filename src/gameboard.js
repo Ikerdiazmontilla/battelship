@@ -44,10 +44,27 @@ const Gameboard = function createGameboard() {
     return result;
   };
 
+  const countBoatsAlive = function () {
+    const boats = [];
+    grid.forEach(line => {
+      line.forEach(slot => {
+        if (
+          slot !== null &&
+          typeof slot === 'object' &&
+          !Array.isArray(slot) &&
+          !boats.includes(slot)
+        ) {
+          boats.push(slot);
+        }
+      });
+    });
+    return boats.length;
+  };
+
   const getGrid = function () {
     return grid;
   };
-  return { getGrid, placeShip, receiveHit, allSunk };
+  return { getGrid, placeShip, receiveHit, allSunk, countBoatsAlive };
 };
 
 export default Gameboard;

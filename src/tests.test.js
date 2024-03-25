@@ -51,6 +51,10 @@ describe('gameboard Logic', () => {
     gameboard.receiveHit(4, 6);
     expect(gameboard.allSunk()).toBe(true);
   });
+
+  test('count boats alive', () => {
+    expect(gameboard.countBoatsAlive()).toBe(1);
+  });
 });
 
 describe('player logic', () => {

@@ -69,12 +69,14 @@ const dom = {
     const indexX = Array.prototype.indexOf.call(enemyGrid.children, column);
     let hit = dom.player1.attack(dom.player2, indexX, indexY);
     dom.populateEnemyGrid(dom.player1, dom.player2);
+    dom.updateBoatsAlive(2);
     if (dom.player2.allSunk() !== false) return dom.playerWon(1);
     if (hit === false) {
       // dom.toggleTurn();
       while (true) {
         hit = dom.player2.randomAttack(dom.player1);
         dom.populateGrid(dom.player1.getGrid());
+        dom.updateBoatsAlive(1);
         if (dom.player1.allSunk() !== false) return dom.playerWon(2);
         if (hit === false) {
           // dom.toggleTurn();
@@ -127,6 +129,18 @@ const dom = {
     if (player1.allSunk() !== false) return 'Player 2 won';
     dom.toggleTurn();
     return false;
+  },
+  updateBoatsAlive(playerNum) {
+    let para;
+    let boatsAlive;
+    if (playerNum === 1) {
+      para = document.querySelector('.ships-alive.one');
+      boatsAlive = dom.player1.countBoatsAlive();
+    } else {
+      para = document.querySelector('.ships-alive.two');
+      boatsAlive = dom.player2.countBoatsAlive();
+    }
+    para.textContent = `Alive ships ${boatsAlive}`;
   },
 };
 

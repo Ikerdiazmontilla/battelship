@@ -19,6 +19,10 @@ const Player = function () {
     return gameboard.getGrid();
   };
 
+  const countBoatsAlive = function () {
+    return gameboard.countBoatsAlive();
+  };
+
   const receiveHit = function (x, y) {
     return gameboard.receiveHit(x, y);
   };
@@ -44,7 +48,7 @@ const Player = function () {
     return attack(player, x, y);
   };
 
-  return { allSunk, placeShip, getGrid, receiveHit, attack, win, randomAttack };
+  return { allSunk, placeShip, getGrid, receiveHit, attack, win, randomAttack, countBoatsAlive };
 };
 
 export default Player;
