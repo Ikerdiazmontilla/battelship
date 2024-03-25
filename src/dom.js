@@ -1,3 +1,5 @@
+import game from './game';
+
 const dom = {
   populateGrid(grid) {
     const gridContainer = document.querySelector('#grid1');
@@ -76,12 +78,21 @@ const dom = {
     return false;
   },
   playerWon(player) {
-    const squares = document.querySelectorAll('.square.empty');
-    squares.forEach(square => {
-      square.removeEventListener('click', dom.startLoop);
+    const dialog = document.querySelector('dialog');
+    dialog.showModal();
+    const restart = dialog.querySelector('.restart');
+    restart.addEventListener('click', game.startGame());
+    restart.addEventListener('click', () => {
+      dialog.close();
     });
     const turns = document.querySelector('.turns');
-    turns.textContent(`Player ${player} won`);
+    turns.textContent = `Player ${player} won!!!`;
+    const winner = document.querySelector('.winner');
+    winner.textContent = `Player ${player} won!!!`;
+    winner.className = 'winner';
+    if (player === 2) {
+      winner.classList.add('two');
+    }
   },
   toggleTurn() {
     const divTurns = document.querySelector('.turns');
