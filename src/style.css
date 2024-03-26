@@ -143,6 +143,7 @@ main{
 
 .turns.red {
    color: var(--red-text);
+   border: 2px ridge var(--red-text);
 }
 
 .grid-container{

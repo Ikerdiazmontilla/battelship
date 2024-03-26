@@ -61,7 +61,7 @@ const dom = {
       gridContainer.appendChild(div);
     });
   },
-  squareClicked: event => {
+  squareClicked: async event => {
     const enemyGrid = document.querySelector('#grid2');
     const column = event.currentTarget.parentNode;
     const clickedSquare = event.currentTarget;
@@ -72,19 +72,23 @@ const dom = {
     dom.updateBoatsAlive(2);
     if (dom.player2.allSunk() !== false) return dom.playerWon(1);
     if (hit === false) {
-      // dom.toggleTurn();
+      dom.toggleTurn();
       while (true) {
+        await dom.delay(500);
         hit = dom.player2.randomAttack(dom.player1);
         dom.populateGrid(dom.player1.getGrid());
         dom.updateBoatsAlive(1);
         if (dom.player1.allSunk() !== false) return dom.playerWon(2);
         if (hit === false) {
-          // dom.toggleTurn();
+          dom.toggleTurn();
           break;
         }
       }
     }
     return false;
+  },
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   },
   playerWon(player) {
     const dialog = document.querySelector('dialog');
@@ -106,7 +110,7 @@ const dom = {
   toggleTurn() {
     const divTurns = document.querySelector('.turns');
     const currentTurn = divTurns.textContent.substring(7, 8);
-    if (currentTurn === 1) {
+    if (currentTurn === '1') {
       divTurns.textContent = 'Player 2 turn';
       divTurns.className = 'turns red';
     } else {
