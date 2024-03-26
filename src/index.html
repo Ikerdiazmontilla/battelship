@@ -91,10 +91,97 @@
             </div>
         </div>
 
-        <dialog>
+        <dialog class="win">
             <div class="dialog-container">
                 <p class="winner">Player 1 won</p>
                 <button class="restart">New game</button>
+            </div>
+        </dialog>
+
+        <dialog class="place-ships">
+            <div class="dialog-container">
+                <h2>Place your ships Captain!</h2>
+                <div class="wrapper">
+                    <div class="number-wrapper">
+                        <div class="x-coordinates">
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                            <p>10</p>
+                        </div>
+                        <div class="y-wrapper">
+                            <div class="y-coordinates">
+                                <p>1</p>
+                                <p>2</p>
+                                <p>3</p>
+                                <p>4</p>
+                                <p>5</p>
+                                <p>6</p>
+                                <p>7</p>
+                                <p>8</p>
+                                <p>9</p>
+                                <p>10</p>
+                            </div>
+                            <div id='grid-place' class="grid"></div>
+                        </div>
+                    </div>
+                    <div class="boats-drag">
+
+                        <div class="boat-wrapper">
+                            <p>Carrier</p>
+                            <div class="boat">
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                            </div>
+                        </div>
+
+                        <div class="boat-wrapper">
+                            <p>Battleship</p>
+                            <div class="boat">
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                            </div>
+                        </div>
+
+                        <div class="boat-wrapper">
+                            <p>Cruiser</p>
+                            <div class="boat">
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                            </div>
+                        </div>
+
+                        <div class="boat-wrapper">
+                            <p>Submarine</p>
+                            <div class="boat">
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                            </div>
+                        </div>
+
+                        <div class="boat-wrapper">
+                            <p>Destroyer</p>
+                            <div class="boat">
+                                <div class="boat-square"></div>
+                                <div class="boat-square"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="restart">Start</button>
             </div>
         </dialog>
     </main>

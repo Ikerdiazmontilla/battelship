@@ -292,6 +292,8 @@ dialog{
    border-radius: 12px;
 }
 
+
+
 .dialog-container{
    width: 100%;
    height: 100%;
@@ -329,4 +331,48 @@ dialog{
 .restart:hover{
    background-color: var(--text);
    color: var(--grid-squares);
+}
+
+
+.place-ships {
+   padding: 2vh 2vw ;
+   min-height: 100vh;
+   opacity: 0.98;
+   color: white;
+}
+
+.place-ships .dialog-container{
+   gap: 2vh;
+}
+
+h2{
+   font-size: 1.8rem;
+   font-weight: 400;
+}
+
+.place-ships .wrapper {
+   flex-direction: row;
+   gap: 5vw;
+   align-items: center;
+}
+
+
+.place-ships .boats-drag {
+   width: 20v;
+   display: flex;
+   flex-direction: column;
+   gap: 3vh;
+}
+
+.place-ships .boat {
+   display: flex;
+}
+
+.boat .boat-square {
+   flex: none;
+   width: 7vh;
+   height: 7vh;
+   background-color: var(--my-boats);
+   border: 4px solid var(--my-boats-border);
+   border-radius: 8px;
 }

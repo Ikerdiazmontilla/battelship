@@ -1,8 +1,11 @@
 import game from './game';
 
 const dom = {
-  populateGrid(grid) {
-    const gridContainer = document.querySelector('#grid1');
+  populateGrid(grid, start = false) {
+    let gridContainer = document.querySelector('#grid1');
+    if (start === true) {
+      gridContainer = document.querySelector('#grid-place');
+    }
     gridContainer.innerHTML = '';
     grid.forEach(line => {
       const div = document.createElement('div');
@@ -91,7 +94,7 @@ const dom = {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
   playerWon(player) {
-    const dialog = document.querySelector('dialog');
+    const dialog = document.querySelector('.win');
     dialog.showModal();
     const restart = dialog.querySelector('.restart');
     restart.addEventListener('click', game.startGame());

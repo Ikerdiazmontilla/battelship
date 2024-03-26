@@ -3,9 +3,6 @@ import dom from './dom';
 import Player from './player';
 import game from './game';
 
-// const dialog = document.querySelector('dialog');
-// dialog.showModal();
-
 game.startGame();
 
 // const player1 = Player();

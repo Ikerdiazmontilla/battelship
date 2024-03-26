@@ -5,6 +5,9 @@ const game = {
   startGame() {
     const player1 = Player();
     const player2 = Player();
+    // dom.populateGrid(player1.getGrid(), true);
+    // const dialog = document.querySelector('.place-ships');
+    // dialog.showModal();
     player1.placeShip([1, 3], 4, 'horizontal');
     player1.placeShip([7, 3], 3, 'horizontal');
     player1.placeShip([8, 8], 2, 'horizontal');

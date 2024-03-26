@@ -58,3 +58,31 @@ create conditions to detect when the game finishes and display it
 
 
 
+  startGame() {
+    // player1.placeShip([1, 3], 4, 'horizontal');
+    // player1.placeShip([7, 3], 3, 'horizontal');
+    // player1.placeShip([8, 8], 2, 'horizontal');
+    // player1.placeShip([1, 5], 2, 'vertical');
+
+    player2.placeShip([1, 3], 4, 'horizontal');
+    player2.placeShip([7, 3], 3, 'horizontal');
+    player2.placeShip([8, 8], 2, 'horizontal');
+    player2.placeShip([1, 5], 2, 'vertical');
+
+    dom.populateGrid(player1.getGrid());
+    dom.populateEnemyGrid(player1, player2);
+  },
+  placeStuff() {
+    const player1 = Player();
+    const player2 = Player();
+    dom.populateGrid(player1.getGrid(), true);
+    const dialog = document.querySelector('.place-ships');
+    dialog.showModal();
+    const startButton = document.querySelector('.place-ships .restart');
+    startButton.addEventListener('click', () => {
+      dialog.close();
+    });
+  }
+
+
+
