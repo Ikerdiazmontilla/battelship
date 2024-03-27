@@ -227,13 +227,21 @@ const dom = {
     const dialogPlace = document.querySelector('.place-ships');
     dialogPlace.showModal();
     dom.dragAndDrop(player1);
-    const startButton = document.querySelector('.place-ships .start');
+    dom.addEventListeners(player1, player2);
+  },
+  addEventListeners(player1, player2) {
+    const oldStartButton = document.querySelector('.place-ships .start');
+    const startButton = oldStartButton.cloneNode(true);
+    oldStartButton.parentNode.replaceChild(startButton, oldStartButton);
     startButton.addEventListener('click', () => {
+      const dialogPlace = document.querySelector('.place-ships');
       dialogPlace.close();
       dom.populateGrid(player1.getGrid());
       dom.populateEnemyGrid(player1, player2);
     });
-    const chDirection = document.querySelector('#direction');
+    const oldChDirection = document.querySelector('#direction');
+    const chDirection = oldChDirection.cloneNode(true);
+    oldChDirection.parentNode.replaceChild(chDirection, oldChDirection);
     chDirection.addEventListener('click', () => {
       const boatDrag = document.querySelector('.boats-drag');
       const boats = document.querySelectorAll('.boat');
