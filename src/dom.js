@@ -95,12 +95,12 @@ const dom = {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
   playerWon(player) {
-    const dialog = document.querySelector('.win');
-    dialog.showModal();
-    const restart = dialog.querySelector('.restart');
-    restart.addEventListener('click', game.startGame());
+    const dialogWin = document.querySelector('.win');
+    dialogWin.showModal();
+    const restart = dialogWin.querySelector('.restart');
+    restart.addEventListener('click', () => game.startGame());
     restart.addEventListener('click', () => {
-      dialog.close();
+      dialogWin.close();
     });
     const turns = document.querySelector('.turns');
     turns.textContent = `Player ${player} won!!!`;
@@ -144,6 +144,8 @@ const dom = {
     };
     boats.forEach(boat => {
       boat.addEventListener('dragstart', onDrag);
+      boat.draggable = true;
+      boat.style.opacity = '1';
     });
 
     const gridListeners = function () {
@@ -222,12 +224,12 @@ const dom = {
   },
   showStartingDialog(player1, player2) {
     dom.populateGrid(player1.getGrid(), true);
-    const dialog = document.querySelector('.place-ships');
-    dialog.showModal();
+    const dialogPlace = document.querySelector('.place-ships');
+    dialogPlace.showModal();
     dom.dragAndDrop(player1);
-    const startButton = document.querySelector('.place-ships .restart');
+    const startButton = document.querySelector('.place-ships .start');
     startButton.addEventListener('click', () => {
-      dialog.close();
+      dialogPlace.close();
       dom.populateGrid(player1.getGrid());
       dom.populateEnemyGrid(player1, player2);
     });
