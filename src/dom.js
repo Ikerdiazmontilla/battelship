@@ -235,6 +235,12 @@ const dom = {
     oldStartButton.parentNode.replaceChild(startButton, oldStartButton);
     startButton.addEventListener('click', () => {
       const dialogPlace = document.querySelector('.place-ships');
+      const boats = document.querySelectorAll('.boat');
+      let canStart;
+      boats.forEach(boat => {
+        if (boat.draggable === true) canStart = false;
+      });
+      if (canStart === false) return;
       dialogPlace.close();
       dom.populateGrid(player1.getGrid());
       dom.populateEnemyGrid(player1, player2);

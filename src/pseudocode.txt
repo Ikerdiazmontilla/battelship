@@ -50,8 +50,6 @@ Grey boats: #808080
 Grey boats border: #464646
 
 
-Add random placing function
-Don't allow starting without placing all the boats
 Try to solve placing problem
 Add multiplayer
 
