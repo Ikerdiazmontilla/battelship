@@ -15,6 +15,10 @@ const Player = function () {
     gameboard.placeShip(start, length, direction);
   };
 
+  const placeShipRandom = function (length) {
+    gameboard.placeShipRandom(length);
+  };
+
   const getGrid = function () {
     return gameboard.getGrid();
   };
@@ -48,7 +52,17 @@ const Player = function () {
     return attack(player, x, y);
   };
 
-  return { allSunk, placeShip, getGrid, receiveHit, attack, win, randomAttack, countBoatsAlive };
+  return {
+    allSunk,
+    placeShip,
+    getGrid,
+    receiveHit,
+    attack,
+    win,
+    randomAttack,
+    countBoatsAlive,
+    placeShipRandom,
+  };
 };
 
 export default Player;

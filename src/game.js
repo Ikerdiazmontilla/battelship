@@ -5,7 +5,11 @@ const game = {
   startGame() {
     const player1 = Player();
     const player2 = Player();
-    // player2.placeShip([0, 2], 5, 'horizontal');
+    player2.placeShipRandom(5);
+    player2.placeShipRandom(4);
+    player2.placeShipRandom(3);
+    player2.placeShipRandom(3);
+    player2.placeShipRandom(2);
     // player2.placeShip([6, 2], 4, 'horizontal');
     // player2.placeShip([6, 6], 3, 'horizontal');
     // player2.placeShip([1, 5], 3, 'vertical');

@@ -6,7 +6,8 @@
         "no-console":"off",
         "prettier/prettier": ["error"],
         "no-undef":"off",
-        "func-names": "off"
+        "func-names": "off",
+        "no-loop-func":"off"
     },
     "overrides": [
       {
