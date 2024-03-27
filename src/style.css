@@ -221,6 +221,8 @@ main{
    transition: background-color 0.2s ease;
 }
 
+
+
 #grid2 .square.empty:hover{
    background-color: rgb(110, 8, 194);
    cursor:crosshair;
@@ -366,6 +368,7 @@ h2{
 
 .place-ships .boat {
    display: flex;
+   width: fit-content;
 }
 
 .boat .boat-square {

@@ -13,7 +13,7 @@ const dom = {
       line.forEach(slot => {
         const square = document.createElement('div');
         if (slot === null) {
-          square.className = 'square';
+          square.className = 'square empty';
         } else if (Array.isArray(slot)) {
           const sunk = slot[1].isSunk();
           if (sunk === false) {
@@ -121,22 +121,6 @@ const dom = {
       divTurns.className = 'turns';
     }
   },
-  startLoop: event => {
-    const enemyGrid = document.querySelector('#grid2');
-    const column = event.currentTarget.parentNode;
-    const clickedSquare = event.currentTarget;
-    const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
-    const indexX = Array.prototype.indexOf.call(enemyGrid.children, column);
-    player1.attack(player2, indexX, indexY);
-    dom.populateEnemyGrid(player1, player2);
-    if (player2.allSunk() !== false) return 'Player 1 won';
-    dom.toggleTurn();
-    player2.randomAttack(player1);
-    dom.populateGrid(player1.getGrid());
-    if (player1.allSunk() !== false) return 'Player 2 won';
-    dom.toggleTurn();
-    return false;
-  },
   updateBoatsAlive(playerNum) {
     let para;
     let boatsAlive;
@@ -148,6 +132,92 @@ const dom = {
       boatsAlive = dom.player2.countBoatsAlive();
     }
     para.textContent = `Alive ships ${boatsAlive}`;
+  },
+  dragAndDrop(player) {
+    const boats = document.querySelectorAll('.boat');
+    const onDrag = event => {
+      event.dataTransfer.setData(
+        'application/json',
+        JSON.stringify({ length: event.currentTarget.children.length, id: event.currentTarget.id })
+      );
+    };
+    boats.forEach(boat => {
+      boat.addEventListener('dragstart', onDrag);
+    });
+
+    const gridListeners = function () {
+      const squares = document.querySelectorAll('#grid-place .square.empty');
+      const onDrop = event => {
+        event.preventDefault();
+        const json = event.dataTransfer.getData('application/json');
+        const object = JSON.parse(json);
+        const { length } = object;
+        const grid = document.querySelector('#grid-place');
+        const column = event.currentTarget.parentNode;
+        const clickedSquare = event.currentTarget;
+        const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
+        const indexX = Array.prototype.indexOf.call(grid.children, column);
+        const direction = 'horizontal';
+        const playerGrid = player.getGrid();
+        const isEmpty = (function () {
+          const array = [];
+          const surroundingArray = [];
+
+          array.push(playerGrid[indexX][indexY]);
+          if (direction === 'horizontal') {
+            for (let i = 0; i < length; i += 1) {
+              array.push(playerGrid[indexX + i][indexY]);
+            }
+          } else {
+            for (let i = 0; i < length; i += 1) {
+              array.push(playerGrid[indexX][indexY + i]);
+            }
+          }
+
+          for (let i = -1; i <= length; i += 1) {
+            const x1 = indexX + (direction === 'horizontal' ? i : 0);
+            const y1 = indexY + (direction === 'horizontal' ? 0 : i);
+            const x2 = indexX + (direction === 'horizontal' ? i : -1);
+            const y2 = indexY + (direction === 'horizontal' ? -1 : i);
+            const x3 = indexX + (direction === 'horizontal' ? i : 1);
+            const y3 = indexY + (direction === 'horizontal' ? 1 : i);
+
+            if (x1 >= 0 && x1 < playerGrid.length && y1 >= 0 && y1 < playerGrid[0].length) {
+              surroundingArray.push(playerGrid[x1][y1]);
+            }
+            if (x2 >= 0 && x2 < playerGrid.length && y2 >= 0 && y2 < playerGrid[0].length) {
+              surroundingArray.push(playerGrid[x2][y2]);
+            }
+            if (x3 >= 0 && x3 < playerGrid.length && y3 >= 0 && y3 < playerGrid[0].length) {
+              surroundingArray.push(playerGrid[x3][y3]);
+            }
+          }
+
+          const empty = array.every(square => square === null);
+          const surroundingEmpty = surroundingArray.every(square => square === null);
+
+          return empty && surroundingEmpty;
+        })();
+
+        if (isEmpty === false) {
+          return;
+        }
+        player.placeShip([indexX, indexY], length, direction);
+        dom.populateGrid(player.getGrid(), true);
+        const draggedBoat = document.getElementById(object.id);
+        draggedBoat.removeEventListener('dragstart', onDrag);
+        draggedBoat.draggable = false;
+        draggedBoat.style.opacity = '0';
+        gridListeners();
+      };
+      squares.forEach(square => {
+        square.addEventListener('dragover', event => {
+          event.preventDefault();
+        });
+        square.addEventListener('drop', onDrop);
+      });
+    };
+    gridListeners();
   },
 };
 
