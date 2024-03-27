@@ -5,6 +5,7 @@ import game from './game';
 
 game.placeStuff();
 
+
 // const player1 = Player();
 // const player2 = Player();
 // player1.placeShip([1, 3], 4, 'horizontal');

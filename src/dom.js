@@ -1,6 +1,7 @@
 import game from './game';
 
 const dom = {
+  direction: 'horizontal',
   populateGrid(grid, start = false) {
     let gridContainer = document.querySelector('#grid1');
     if (start === true) {
@@ -157,7 +158,7 @@ const dom = {
         const clickedSquare = event.currentTarget;
         const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
         const indexX = Array.prototype.indexOf.call(grid.children, column);
-        const direction = 'horizontal';
+        const { direction } = dom;
         const playerGrid = player.getGrid();
         const isEmpty = (function () {
           const array = [];
@@ -218,6 +219,36 @@ const dom = {
       });
     };
     gridListeners();
+  },
+  showStartingDialog(player1, player2) {
+    dom.populateGrid(player1.getGrid(), true);
+    const dialog = document.querySelector('.place-ships');
+    dialog.showModal();
+    dom.dragAndDrop(player1);
+    const startButton = document.querySelector('.place-ships .restart');
+    startButton.addEventListener('click', () => {
+      dialog.close();
+      dom.populateGrid(player1.getGrid());
+      dom.populateEnemyGrid(player1, player2);
+    });
+    const chDirection = document.querySelector('#direction');
+    chDirection.addEventListener('click', () => {
+      const boatDrag = document.querySelector('.boats-drag');
+      const boats = document.querySelectorAll('.boat');
+      if (this.direction === 'horizontal') {
+        boatDrag.classList.add('vertical');
+        boats.forEach(boat => {
+          boat.classList.add('vertical');
+        });
+        this.direction = 'vertical';
+      } else {
+        boatDrag.classList.remove('vertical');
+        boats.forEach(boat => {
+          boat.classList.remove('vertical');
+        });
+        this.direction = 'horizontal';
+      }
+    });
   },
 };
 

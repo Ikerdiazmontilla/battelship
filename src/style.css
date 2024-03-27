@@ -319,7 +319,7 @@ dialog{
    border: 2px solid var(--red-text);
 }
 
-.restart{
+button{
    font-size: 1.5rem;
    color: var(--text);
    background-color: var(--grid-squares);
@@ -330,7 +330,7 @@ dialog{
    transition: 0.3s ease ;
 }
 
-.restart:hover{
+button:hover{
    background-color: var(--text);
    color: var(--grid-squares);
 }
@@ -347,9 +347,18 @@ dialog{
    gap: 2vh;
 }
 
+.place-ships .dialog-header{
+   display: flex;
+   gap: 8vw;
+}
+
 h2{
    font-size: 1.8rem;
    font-weight: 400;
+}
+
+#direction {
+   padding: 5px;
 }
 
 .place-ships .wrapper {
@@ -366,9 +375,24 @@ h2{
    gap: 3vh;
 }
 
+.place-ships .boats-drag.vertical {
+   flex-direction: row;
+   gap: 3vw;
+}
+
+.place-ships .boat-wrapper {
+   display:flex;
+   flex-direction: column;
+}
+
 .place-ships .boat {
    display: flex;
    width: fit-content;
+}
+
+.place-ships .boat.vertical {
+   flex-direction: column;
+   align-self: center;
 }
 
 .boat .boat-square {
