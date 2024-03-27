@@ -239,6 +239,7 @@ const dom = {
       dom.populateGrid(player1.getGrid());
       dom.populateEnemyGrid(player1, player2);
     });
+
     const oldChDirection = document.querySelector('#direction');
     const chDirection = oldChDirection.cloneNode(true);
     oldChDirection.parentNode.replaceChild(chDirection, oldChDirection);
@@ -258,6 +259,27 @@ const dom = {
         });
         this.direction = 'horizontal';
       }
+    });
+
+    const oldRandom = document.querySelector('.random');
+    const random = oldRandom.cloneNode(true);
+    oldRandom.parentNode.replaceChild(random, oldRandom);
+    random.addEventListener('click', () => {
+      player1.emptyGrid();
+      player1.placeShipRandom(5);
+      player1.placeShipRandom(4);
+      player1.placeShipRandom(3);
+      player1.placeShipRandom(3);
+      player1.placeShipRandom(2);
+      dom.populateGrid(player1.getGrid(), true);
+      const boats = document.querySelectorAll('.boat');
+      boats.forEach(boat => {
+        const oldBoat = boat;
+        const newBoat = oldBoat.cloneNode(true);
+        oldBoat.parentNode.replaceChild(newBoat, oldBoat);
+        newBoat.draggable = false;
+        newBoat.style.opacity = '0';
+      });
     });
   },
 };

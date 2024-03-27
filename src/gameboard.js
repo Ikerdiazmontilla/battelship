@@ -14,7 +14,7 @@ const createGrid = function (n = 10) {
 };
 
 const Gameboard = function createGameboard() {
-  const grid = createGrid();
+  let grid = createGrid();
   const placeShip = function (start, length, direction) {
     const shipObj = Ship(length);
     if (direction === 'vertical') {
@@ -94,6 +94,10 @@ const Gameboard = function createGameboard() {
     }
   };
 
+  const emptyGrid = function () {
+    grid = createGrid();
+  }
+
   const receiveHit = function (x, y) {
     const value = grid[x][y];
     if (value === null) {
@@ -135,7 +139,7 @@ const Gameboard = function createGameboard() {
   const getGrid = function () {
     return grid;
   };
-  return { getGrid, placeShip, placeShipRandom, receiveHit, allSunk, countBoatsAlive };
+  return { getGrid, emptyGrid, placeShip, placeShipRandom, receiveHit, allSunk, countBoatsAlive };
 };
 
 export default Gameboard;

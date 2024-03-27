@@ -23,6 +23,10 @@ const Player = function () {
     return gameboard.getGrid();
   };
 
+  const emptyGrid = function () {
+    gameboard.emptyGrid();
+  }
+
   const countBoatsAlive = function () {
     return gameboard.countBoatsAlive();
   };
@@ -62,6 +66,7 @@ const Player = function () {
     randomAttack,
     countBoatsAlive,
     placeShipRandom,
+    emptyGrid,
   };
 };
 
