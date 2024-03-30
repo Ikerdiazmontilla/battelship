@@ -271,11 +271,11 @@ main{
    border-top: 2px solid var(--green-text);
 }
 
-.info.two{
+.info.red{
    color: var(--red-text);
 }
 
-.info.two .ships-alive{
+.info.red .ships-alive{
    border-top: 2px solid var(--red-text);
 }
 

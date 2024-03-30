@@ -1,15 +1,16 @@
 import dom from './dom';
 import Player from './player';
+import multiplayer from './multiplayer'
 
 const game = {
   startGame() {
-    const player1 = Player();
-    const player2 = Player();
-    player2.placeShipRandom(5);
-    player2.placeShipRandom(4);
-    player2.placeShipRandom(3);
-    player2.placeShipRandom(3);
-    player2.placeShipRandom(2);
+    const player1 = Player(1);
+    const player2 = Player(2);
+    // player2.placeShipRandom(5);
+    // player2.placeShipRandom(4);
+    // player2.placeShipRandom(3);
+    // player2.placeShipRandom(3);
+    // player2.placeShipRandom(2);
     // player2.placeShip([6, 2], 4, 'horizontal');
     // player2.placeShip([6, 6], 3, 'horizontal');
     // player2.placeShip([1, 5], 3, 'vertical');
@@ -20,6 +21,11 @@ const game = {
     // player1.placeShip([8, 8], 2, 'horizontal');
     // player1.placeShip([1, 5], 2, 'vertical');
   },
+  startMultiplayer() {
+    const player1 = Player(1);
+    const player2 = Player(2);
+    multiplayer.showStartingDialog(player1, player2);
+  }
 };
 
 export default game;

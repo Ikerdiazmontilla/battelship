@@ -3,7 +3,7 @@ import dom from './dom';
 import Player from './player';
 import game from './game';
 
-game.startGame();
+game.startMultiplayer();
 
 // const player1 = Player();
 // const player2 = Player();

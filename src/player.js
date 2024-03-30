@@ -1,6 +1,6 @@
 import Gameboard from './gameboard';
 
-const Player = function () {
+const Player = function (number) {
   const gameboard = Gameboard();
 
   const allSunk = function () {
@@ -57,6 +57,7 @@ const Player = function () {
   };
 
   return {
+    number,
     allSunk,
     placeShip,
     getGrid,
