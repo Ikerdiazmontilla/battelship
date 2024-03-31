@@ -78,12 +78,23 @@ const multiplayer = {
     multiplayer.populateEnemyGrid(multiplayer.player1, multiplayer.player2);
     multiplayer.updateBoatsAlive();
     if (hit === false) {
+      multiplayer.showWaterDialog();
       multiplayer.populateGrid(multiplayer.player2.getGrid());
       multiplayer.populateEnemyGrid(multiplayer.player2, multiplayer.player1);
       multiplayer.updateBoatsAlive();
       multiplayer.toggleTurn();
     }
     return false;
+  },
+  showWaterDialog() {
+    const waterDialog = document.querySelector('.water-dialog');
+    waterDialog.showModal();
+    waterDialog.classList.add('show');
+    const closeDialog = document.querySelector('.change-turn');
+    closeDialog.addEventListener('click', () => {
+      waterDialog.close();
+      waterDialog.classList.remove('show');
+    });
   },
   // delay(ms) {
   //   return new Promise(resolve => setTimeout(resolve, ms));
