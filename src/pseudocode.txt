@@ -52,7 +52,6 @@ Grey boats border: #464646
 
 Try to solve placing problem
 Add multiplayer
-Change info under grid each time side to side. => add the player stuff in the toggle turn function
 Add delay or a button or something for when you do your move, tell the player if it was a hit or water or sunk.
 Change the text of the opening dialog to player1 and player2 and the start button text too.
 When de game is finished, fix restart.

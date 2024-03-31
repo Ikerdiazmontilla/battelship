@@ -76,11 +76,11 @@ const multiplayer = {
     const hit = multiplayer.player1.attack(multiplayer.player2, indexX, indexY);
     if (multiplayer.player2.allSunk() !== false) return multiplayer.playerWon(multiplayer.player1);
     multiplayer.populateEnemyGrid(multiplayer.player1, multiplayer.player2);
-    multiplayer.updateBoatsAlive(2);
+    multiplayer.updateBoatsAlive();
     if (hit === false) {
       multiplayer.populateGrid(multiplayer.player2.getGrid());
       multiplayer.populateEnemyGrid(multiplayer.player2, multiplayer.player1);
-      multiplayer.updateBoatsAlive(1);
+      multiplayer.updateBoatsAlive();
       multiplayer.toggleTurn();
     }
     return false;
@@ -128,17 +128,13 @@ const multiplayer = {
       defendorInfo.className = 'info two red';
     }
   },
-  updateBoatsAlive(playerNum) {
-    let para;
-    let boatsAlive;
-    if (playerNum === 1) {
-      para = document.querySelector('.ships-alive.one');
-      boatsAlive = multiplayer.player1.countBoatsAlive();
-    } else {
-      para = document.querySelector('.ships-alive.two');
-      boatsAlive = multiplayer.player2.countBoatsAlive();
-    }
-    para.textContent = `Alive ships ${boatsAlive}`;
+  updateBoatsAlive() {
+    const para1 = document.querySelector('.ships-alive.one');
+    const boatsAlive1 = multiplayer.player1.countBoatsAlive();
+    para1.textContent = `Alive ships ${boatsAlive1}`;
+    const para2 = document.querySelector('.ships-alive.two');
+    const boatsAlive2 = multiplayer.player2.countBoatsAlive();
+    para2.textContent = `Alive ships ${boatsAlive2}`;
   },
   dragAndDrop(player) {
     const boats = document.querySelectorAll('.boat');
