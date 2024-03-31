@@ -96,14 +96,11 @@ const multiplayer = {
       waterDialog.classList.remove('show');
     });
   },
-  // delay(ms) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // },
   playerWon(player) {
     const dialogWin = document.querySelector('.win');
     dialogWin.showModal();
     const restart = dialogWin.querySelector('.restart');
-    restart.addEventListener('click', () => game.startMultiplayer());
+    restart.addEventListener('click', () => game.chooseGame());
     restart.addEventListener('click', () => {
       dialogWin.close();
     });

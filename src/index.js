@@ -2,8 +2,11 @@ import './style.css';
 import dom from './dom';
 import Player from './player';
 import game from './game';
+import multiplayer from './multiplayer';
 
-game.startMultiplayer();
+// game.startMultiplayer();
+
+game.chooseGame();
 
 // const player1 = Player();
 // const player2 = Player();

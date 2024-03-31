@@ -417,3 +417,18 @@ h2{
 .water-dialog.show{
    opacity: 1;
 }
+
+.choose-game{
+   color: var(--text);
+   font-size: 4rem;
+   padding: 2vh 2vw;
+   min-height: 100vh;
+   min-width: 100vw;
+   opacity: 1;
+}
+
+.choose-game button {
+   font-size: 2rem;
+   padding: 20px;
+   border-radius: 2.5rem;
+}

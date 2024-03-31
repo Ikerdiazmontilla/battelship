@@ -98,7 +98,7 @@ const dom = {
     const dialogWin = document.querySelector('.win');
     dialogWin.showModal();
     const restart = dialogWin.querySelector('.restart');
-    restart.addEventListener('click', () => game.startGame());
+    restart.addEventListener('click', () => game.chooseGame());
     restart.addEventListener('click', () => {
       dialogWin.close();
     });
