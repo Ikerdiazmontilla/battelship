@@ -53,10 +53,11 @@ Grey boats border: #464646
 Try to solve placing problem
 Add multiplayer
 Add delay or a button or something for when you do your move, tell the player if it was a hit or water or sunk.
-Change the text of the opening dialog to player1 and player2 and the start button text too.
 When de game is finished, fix restart.
 Make people able to choose between multiplayer and against computer.
 
+
+Change bg color when dragover and recover when move the cursor
 
 
 

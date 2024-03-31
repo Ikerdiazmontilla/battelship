@@ -224,6 +224,12 @@ const multiplayer = {
     };
     gridListeners();
   },
+  prepareStartingDialog() {
+    const startingButton = document.querySelector('.place-ships .start');
+    startingButton.textContent = 'Next';
+    const dialogTitle = document.querySelector('.dialog-header h2');
+    dialogTitle.textContent = 'Place your ships Captain 1!';
+  },
   showStartingDialog(player1, player2) {
     multiplayer.populateGrid(player1.getGrid(), true);
     const dialogPlace = document.querySelector('.place-ships');
@@ -244,6 +250,9 @@ const multiplayer = {
       });
       if (canStart === false) return;
       if (this.playerPlacing === 1) {
+        const dialogTitle = document.querySelector('.dialog-header h2');
+        dialogTitle.textContent = 'Place your ships Captain 2!';
+        startButton.textContent = 'Start';
         this.playerPlacing = 2;
         this.showStartingDialog(player2, player1);
         return;
@@ -295,6 +304,12 @@ const multiplayer = {
       });
     });
   },
+  resetEverything() {
+    this.player1 = null;
+    this.player2 = null;
+    this.playerPlacing = 1;
+    this.direction = 'horizontal';
+  }
 };
 
 export default multiplayer;
