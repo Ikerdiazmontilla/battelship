@@ -109,6 +109,8 @@ const multiplayer = {
     dialogTitle.textContent = 'Place your ships Captain 1!';
   },
   showStartingDialog(player1, player2) {
+    multiplayer.resetEverything();
+    multiplayer.prepareStartingDialog();
     multiplayer.populateGrid(player1.getGrid(), true);
     const dialogPlace = document.querySelector('.place-ships');
     dialogPlace.showModal();

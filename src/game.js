@@ -16,8 +16,6 @@ const game = {
   startMultiplayer() {
     const player1 = Player(1);
     const player2 = Player(2);
-    multiplayer.resetEverything();
-    multiplayer.prepareStartingDialog();
     multiplayer.showStartingDialog(player1, player2);
   },
   chooseGame() {
