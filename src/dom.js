@@ -77,22 +77,21 @@ const dom = {
     if (dom.player2.allSunk() !== false) return dom.playerWon(1);
     if (hit === false) {
       dom.toggleTurn();
-      while (true) {
+      do {
         await dom.delay(500);
         hit = dom.player2.randomAttack(dom.player1);
         dom.populateGrid(dom.player1.getGrid());
         dom.updateBoatsAlive(1);
         if (dom.player1.allSunk() !== false) return dom.playerWon(2);
-        if (hit === false) {
-          dom.toggleTurn();
-          break;
-        }
-      }
+      } while (hit !== false);
+      dom.toggleTurn();
     }
     return false;
   },
   delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => {
+      setTimeout(resolve, ms);
+    });
   },
   playerWon(player) {
     const dialogWin = document.querySelector('.win');

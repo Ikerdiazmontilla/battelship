@@ -1,6 +1,6 @@
 import dom from './dom';
 import Player from './player';
-import multiplayer from './multiplayer'
+import multiplayer from './multiplayer';
 
 const game = {
   startGame() {

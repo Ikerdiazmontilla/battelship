@@ -96,7 +96,7 @@ const Gameboard = function createGameboard() {
 
   const emptyGrid = function () {
     grid = createGrid();
-  }
+  };
 
   const receiveHit = function (x, y) {
     const value = grid[x][y];

@@ -1,5 +1,4 @@
 import game from './game';
-import Player from './player';
 
 const multiplayer = {
   direction: 'horizontal',
@@ -317,7 +316,7 @@ const multiplayer = {
     this.player2 = null;
     this.playerPlacing = 1;
     this.direction = 'horizontal';
-  }
+  },
 };
 
 export default multiplayer;

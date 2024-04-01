@@ -25,7 +25,7 @@ const Player = function (number) {
 
   const emptyGrid = function () {
     gameboard.emptyGrid();
-  }
+  };
 
   const countBoatsAlive = function () {
     return gameboard.countBoatsAlive();
@@ -46,13 +46,10 @@ const Player = function (number) {
   const randomAttack = function (player) {
     let x;
     let y;
-    while (true) {
+    do {
       x = Math.floor(Math.random() * 10);
       y = Math.floor(Math.random() * 10);
-      if (typeof player.getGrid()[x][y] === 'object' && !Array.isArray(player.getGrid()[x][y])) {
-        break;
-      }
-    }
+    } while (typeof player.getGrid()[x][y] !== 'object' || Array.isArray(player.getGrid()[x][y]));
     return attack(player, x, y);
   };
 

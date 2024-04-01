@@ -5,9 +5,12 @@
         "import/no-extraneous-dependencies": "off",
         "no-console":"off",
         "prettier/prettier": ["error"],
-        "no-undef":"off",
+        "no-undef": "off",
         "func-names": "off",
-        "no-loop-func":"off"
+        "no-loop-func": "off",
+        "no-param-reassign": ["error", { "props": false }],
+        "no-await-in-loop":"off",
+        "import/no-cycle":"off"
     },
     "overrides": [
       {
