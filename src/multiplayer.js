@@ -1,4 +1,3 @@
-import multiplayerEventHandler from './multiplayerEventHandler';
 import EventHandler from './eventHandler';
 
 const multiplayer = {
@@ -31,7 +30,7 @@ const multiplayer = {
         } else if (playerNumber === 2) {
           if (slot === null || (slot !== null && typeof slot === 'object')) {
             square.className = 'square empty';
-            square.addEventListener('click', multiplayerEventHandler.onSquareClicked);
+            square.addEventListener('click', EventHandler.onMultiplayerSquareClicked);
           }
         }
         div.appendChild(square);
@@ -96,91 +95,12 @@ const multiplayer = {
   },
   dragAndDrop(player) {
     const boats = document.querySelectorAll('.boat');
-    const onDrag = event => {
-      event.dataTransfer.setData(
-        'application/json',
-        JSON.stringify({ length: event.currentTarget.children.length, id: event.currentTarget.id })
-      );
-    };
     boats.forEach(boat => {
-      boat.addEventListener('dragstart', onDrag);
+      boat.addEventListener('dragstart', EventHandler.onDrag);
       boat.draggable = true;
       boat.style.opacity = '1';
     });
-
-    const gridListeners = function () {
-      const squares = document.querySelectorAll('#grid-place .square.empty');
-      const onDrop = event => {
-        event.preventDefault();
-        const json = event.dataTransfer.getData('application/json');
-        const object = JSON.parse(json);
-        const { length } = object;
-        const grid = document.querySelector('#grid-place');
-        const column = event.currentTarget.parentNode;
-        const clickedSquare = event.currentTarget;
-        const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
-        const indexX = Array.prototype.indexOf.call(grid.children, column);
-        const { direction } = multiplayer;
-        const playerGrid = player.getGrid();
-        const isEmpty = (function () {
-          const array = [];
-          const surroundingArray = [];
-
-          array.push(playerGrid[indexX][indexY]);
-          if (direction === 'horizontal') {
-            for (let i = 0; i < length; i += 1) {
-              array.push(playerGrid[indexX + i][indexY]);
-            }
-          } else {
-            for (let i = 0; i < length; i += 1) {
-              array.push(playerGrid[indexX][indexY + i]);
-            }
-          }
-
-          for (let i = -1; i <= length; i += 1) {
-            const x1 = indexX + (direction === 'horizontal' ? i : 0);
-            const y1 = indexY + (direction === 'horizontal' ? 0 : i);
-            const x2 = indexX + (direction === 'horizontal' ? i : -1);
-            const y2 = indexY + (direction === 'horizontal' ? -1 : i);
-            const x3 = indexX + (direction === 'horizontal' ? i : 1);
-            const y3 = indexY + (direction === 'horizontal' ? 1 : i);
-
-            if (x1 >= 0 && x1 < playerGrid.length && y1 >= 0 && y1 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x1][y1]);
-            }
-            if (x2 >= 0 && x2 < playerGrid.length && y2 >= 0 && y2 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x2][y2]);
-            }
-            if (x3 >= 0 && x3 < playerGrid.length && y3 >= 0 && y3 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x3][y3]);
-            }
-          }
-
-          const empty = array.every(square => square === null);
-          const surroundingEmpty = surroundingArray.every(square => square === null);
-
-          return empty && surroundingEmpty;
-        })();
-
-        if (isEmpty === false) {
-          return;
-        }
-        player.placeShip([indexX, indexY], length, direction);
-        multiplayer.populateGrid(player.getGrid(), true);
-        const draggedBoat = document.getElementById(object.id);
-        draggedBoat.removeEventListener('dragstart', onDrag);
-        draggedBoat.draggable = false;
-        draggedBoat.style.opacity = '0';
-        gridListeners();
-      };
-      squares.forEach(square => {
-        square.addEventListener('dragover', event => {
-          event.preventDefault();
-        });
-        square.addEventListener('drop', onDrop);
-      });
-    };
-    gridListeners();
+    EventHandler.addGridListeners(player);
   },
   prepareStartingDialog() {
     const startingButton = document.querySelector('.place-ships .start');
@@ -193,71 +113,7 @@ const multiplayer = {
     const dialogPlace = document.querySelector('.place-ships');
     dialogPlace.showModal();
     multiplayer.dragAndDrop(player1);
-    multiplayer.addEventListeners(player1, player2);
-  },
-  addEventListeners(player1, player2) {
-    const oldStartButton = document.querySelector('.place-ships .start');
-    const startButton = EventHandler.removeEventListeners(oldStartButton);
-    startButton.addEventListener('click', () => {
-      const dialogPlace = document.querySelector('.place-ships');
-      const boats = document.querySelectorAll('.boat');
-      let canStart;
-      boats.forEach(boat => {
-        if (boat.draggable === true) canStart = false;
-      });
-      if (canStart === false) return;
-      if (this.playerPlacing === 1) {
-        const dialogTitle = document.querySelector('.dialog-header h2');
-        dialogTitle.textContent = 'Place your ships Captain 2!';
-        startButton.textContent = 'Start';
-        this.playerPlacing = 2;
-        this.showStartingDialog(player2, player1);
-        return;
-      }
-      dialogPlace.close();
-      multiplayer.populateGrid(player2.getGrid());
-      multiplayer.populateEnemyGrid(player2, player1);
-    });
-
-    const oldChDirection = document.querySelector('#direction');
-    const chDirection = EventHandler.removeEventListeners(oldChDirection);
-    chDirection.addEventListener('click', () => {
-      const boatDrag = document.querySelector('.boats-drag');
-      const boats = document.querySelectorAll('.boat');
-      if (this.direction === 'horizontal') {
-        boatDrag.classList.add('vertical');
-        boats.forEach(boat => {
-          boat.classList.add('vertical');
-        });
-        this.direction = 'vertical';
-      } else {
-        boatDrag.classList.remove('vertical');
-        boats.forEach(boat => {
-          boat.classList.remove('vertical');
-        });
-        this.direction = 'horizontal';
-      }
-    });
-
-    const oldRandom = document.querySelector('.random');
-    const random = EventHandler.removeEventListeners(oldRandom);
-    random.addEventListener('click', () => {
-      player1.emptyGrid();
-      player1.placeShipRandom(5);
-      player1.placeShipRandom(4);
-      player1.placeShipRandom(3);
-      player1.placeShipRandom(3);
-      player1.placeShipRandom(2);
-      multiplayer.populateGrid(player1.getGrid(), true);
-      const boats = document.querySelectorAll('.boat');
-      boats.forEach(boat => {
-        const oldBoat = boat;
-        const newBoat = oldBoat.cloneNode(true);
-        oldBoat.parentNode.replaceChild(newBoat, oldBoat);
-        newBoat.draggable = false;
-        newBoat.style.opacity = '0';
-      });
-    });
+    EventHandler.addEventListeners(player1, player2, true);
   },
   resetEverything() {
     this.player1 = null;

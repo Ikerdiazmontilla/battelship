@@ -1,14 +1,19 @@
 import dom from './dom';
 import isPositionValidForShip from './isPositionValidForShip';
 import game from './game';
+import multiplayer from './multiplayer';
 
 const EventHandler = {
-  addEventListeners(player1, player2) {
+  addEventListeners(player1, player2, isMultiplayer = false) {
     this.player1 = player1;
     this.player2 = player2;
     const oldStartButton = document.querySelector('.place-ships .start');
     const startButton = EventHandler.removeEventListeners(oldStartButton);
-    startButton.addEventListener('click', this.onStartClick);
+    if (isMultiplayer === true) {
+      startButton.addEventListener('click', this.onMultiplayerStartClick);
+    } else {
+      startButton.addEventListener('click', this.onStartClick);
+    }
 
     const oldChDirection = document.querySelector('#direction');
     const chDirection = EventHandler.removeEventListeners(oldChDirection);
@@ -63,6 +68,27 @@ const EventHandler = {
     dialogPlace.close();
     dom.populateGrid(EventHandler.player1.getGrid());
     dom.populateEnemyGrid(EventHandler.player1, EventHandler.player2);
+  },
+  onMultiplayerStartClick() {
+    const dialogPlace = document.querySelector('.place-ships');
+    const boats = document.querySelectorAll('.boat');
+    const startButton = document.querySelector('.place-ships .start');
+    let canStart;
+    boats.forEach(boat => {
+      if (boat.draggable === true) canStart = false;
+    });
+    if (canStart === false) return;
+    if (multiplayer.playerPlacing === 1) {
+      const dialogTitle = document.querySelector('.dialog-header h2');
+      dialogTitle.textContent = 'Place your ships Captain 2!';
+      startButton.textContent = 'Start';
+      multiplayer.playerPlacing = 2;
+      multiplayer.showStartingDialog(EventHandler.player2, EventHandler.player1);
+      return;
+    }
+    dialogPlace.close();
+    multiplayer.populateGrid(EventHandler.player2.getGrid());
+    multiplayer.populateEnemyGrid(EventHandler.player2, EventHandler.player1);
   },
   onDrag(event) {
     event.dataTransfer.setData(
@@ -149,6 +175,27 @@ const EventHandler = {
     if (player === 2) {
       winner.classList.add('two');
     }
+  },
+  onMultiplayerSquareClicked: async event => {
+    const enemyGrid = document.querySelector('#grid2');
+    const column = event.currentTarget.parentNode;
+    const clickedSquare = event.currentTarget;
+    const indexY = Array.prototype.indexOf.call(column.children, clickedSquare);
+    const indexX = Array.prototype.indexOf.call(enemyGrid.children, column);
+    const hit = multiplayer.player1.attack(multiplayer.player2, indexX, indexY);
+    if (multiplayer.player2.allSunk() !== false) {
+      return EventHandler.onWin(multiplayer.player1.number);
+    }
+    multiplayer.populateEnemyGrid(multiplayer.player1, multiplayer.player2);
+    multiplayer.updateBoatsAlive();
+    if (hit === false) {
+      multiplayer.showWaterDialog();
+      multiplayer.populateGrid(multiplayer.player2.getGrid());
+      multiplayer.populateEnemyGrid(multiplayer.player2, multiplayer.player1);
+      multiplayer.updateBoatsAlive();
+      multiplayer.toggleTurn();
+    }
+    return false;
   },
 };
 
