@@ -5,7 +5,6 @@ import dragAndDrop from './dragAndDrop';
 const multiplayer = {
   direction: 'horizontal',
   playerPlacing: 1,
-
   populateGrid(grid, start = false) {
     let gridContainer = document.querySelector('#grid1');
     if (start === true) {

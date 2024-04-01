@@ -90,6 +90,7 @@ transform: rotate(360deg) scale(1.2);
 /* Styling */
 
 :root{
+   font-size: 16px;
  --header-bg: #3D3D3D;
  --main-bg:#303030;
  --text:#FFFFFF;
@@ -426,6 +427,7 @@ h2{
    min-height: 100vh;
    min-width: 100vw;
    opacity: 1;
+   text-align: center;
 }
 
 .choose-game button {
@@ -433,3 +435,90 @@ h2{
    padding: 20px;
    border-radius: 2.5rem;
 }
+
+@media (max-width: 768px) {
+
+   :root{
+      font-size: 12px;
+   }
+
+   header{
+      justify-content: center;
+   }
+ 
+   .grid-container {
+     flex-direction: column;
+     gap: 2vh;
+   }
+ 
+   .grid {
+     height: 40vh;
+   }
+ 
+   .x-coordinates {
+     width: 40vh;
+   }
+ 
+   .y-coordinates {
+     min-height: 40vh;
+   }
+ 
+   .y-coordinates p {
+     height: 4vh;
+   }
+ 
+   .x-coordinates p {
+     width: 4vh;
+   }
+
+   button{
+      padding: 10px;
+   }
+ 
+   .place-ships .dialog-header {
+     gap: 2vw;
+   }
+ 
+   .place-ships .wrapper {
+     flex-direction: column;
+     gap: 2vh;
+   }
+ 
+   .place-ships .boats-drag {
+     width: 80vw;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+   }
+ 
+   .place-ships .boats-drag.vertical {
+     flex-direction: row;
+     flex-wrap: wrap;
+   }
+ 
+   .place-ships .boat-wrapper {
+     flex-direction: row;
+     align-items: center;
+   }
+ 
+   .place-ships .boat {
+     flex-direction: row;
+   }
+ 
+   .place-ships .boat.vertical {
+     flex-direction: column;
+   }
+ 
+   .boat .boat-square {
+     width: 4vh;
+     height: 4vh;
+   }
+ 
+   .choose-game button {
+     padding: 10px;
+   }
+   
+   .water-dialog {
+      font-size: 2rem;
+   }
+ }
