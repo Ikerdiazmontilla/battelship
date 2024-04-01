@@ -1,4 +1,5 @@
 import game from './game';
+import isPositionValidForShip from './isPositionValidForShip';
 
 const dom = {
   direction: 'horizontal',
@@ -161,49 +162,11 @@ const dom = {
         const indexX = Array.prototype.indexOf.call(grid.children, column);
         const { direction } = dom;
         const playerGrid = player.getGrid();
-        const isEmpty = (function () {
-          const array = [];
-          const surroundingArray = [];
-
-          array.push(playerGrid[indexX][indexY]);
-          if (direction === 'horizontal') {
-            for (let i = 0; i < length; i += 1) {
-              array.push(playerGrid[indexX + i][indexY]);
-            }
-          } else {
-            for (let i = 0; i < length; i += 1) {
-              array.push(playerGrid[indexX][indexY + i]);
-            }
-          }
-
-          for (let i = -1; i <= length; i += 1) {
-            const x1 = indexX + (direction === 'horizontal' ? i : 0);
-            const y1 = indexY + (direction === 'horizontal' ? 0 : i);
-            const x2 = indexX + (direction === 'horizontal' ? i : -1);
-            const y2 = indexY + (direction === 'horizontal' ? -1 : i);
-            const x3 = indexX + (direction === 'horizontal' ? i : 1);
-            const y3 = indexY + (direction === 'horizontal' ? 1 : i);
-
-            if (x1 >= 0 && x1 < playerGrid.length && y1 >= 0 && y1 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x1][y1]);
-            }
-            if (x2 >= 0 && x2 < playerGrid.length && y2 >= 0 && y2 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x2][y2]);
-            }
-            if (x3 >= 0 && x3 < playerGrid.length && y3 >= 0 && y3 < playerGrid[0].length) {
-              surroundingArray.push(playerGrid[x3][y3]);
-            }
-          }
-
-          const empty = array.every(square => square === null);
-          const surroundingEmpty = surroundingArray.every(square => square === null);
-
-          return empty && surroundingEmpty;
-        })();
-
-        if (isEmpty === false) {
+        const isValid = isPositionValidForShip(indexX, indexY, direction, length, playerGrid);
+        if (isValid === false) {
           return;
         }
+
         player.placeShip([indexX, indexY], length, direction);
         dom.populateGrid(player.getGrid(), true);
         const draggedBoat = document.getElementById(object.id);
