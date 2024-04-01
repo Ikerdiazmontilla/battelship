@@ -51,7 +51,6 @@ Grey boats border: #464646
 
 
 
-Check if there are event handlers that are still in dom, like playerWon
 Uncouple PopulateGrid And populateEnemyGrid functions and cut repetition
 Look claude for more improvementsr
 Fix multiplayer
