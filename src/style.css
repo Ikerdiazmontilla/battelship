@@ -373,6 +373,7 @@ h2{
    display: flex;
    flex-direction: column;
    gap: 3vh;
+   cursor: pointer;
 }
 
 .place-ships .boats-drag.vertical {

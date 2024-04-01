@@ -1,4 +1,5 @@
 import EventHandler from './eventHandler';
+import dragAndDrop from './dragAndDrop';
 
 const dom = {
   direction: 'horizontal',
@@ -80,16 +81,6 @@ const dom = {
     }
     para.textContent = `Alive ships: ${boatsAlive}`;
   },
-  dragAndDrop(player) {
-    const boats = document.querySelectorAll('.boat');
-    boats.forEach(boat => {
-      boat.addEventListener('dragstart', EventHandler.onDrag);
-      boat.draggable = true;
-      boat.style.opacity = '1';
-    });
-
-    EventHandler.addGridListeners(player);
-  },
   prepareNewGame() {
     const divTurns = document.querySelector('.turns');
     divTurns.textContent = 'Player 1 turn';
@@ -104,7 +95,7 @@ const dom = {
     dom.populateGrid(player1.getGrid(), true);
     const dialogPlace = document.querySelector('.place-ships');
     dialogPlace.showModal();
-    dom.dragAndDrop(player1);
+    dragAndDrop(player1);
     EventHandler.addEventListeners(player1, player2);
   },
 };
