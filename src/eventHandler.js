@@ -1,5 +1,6 @@
 import dom from './dom';
 import isPositionValidForShip from './isPositionValidForShip';
+import game from './game';
 
 const EventHandler = {
   addEventListeners(player1, player2) {
@@ -118,7 +119,7 @@ const EventHandler = {
     let hit = dom.player1.attack(dom.player2, indexX, indexY);
     dom.populateEnemyGrid(dom.player1, dom.player2);
     dom.updateBoatsAlive(2);
-    if (dom.player2.allSunk() !== false) return dom.playerWon(1);
+    if (dom.player2.allSunk() !== false) return EventHandler.onWin(1);
     if (hit === false) {
       dom.toggleTurn();
       do {
@@ -126,11 +127,28 @@ const EventHandler = {
         hit = dom.player2.randomAttack(dom.player1);
         dom.populateGrid(dom.player1.getGrid());
         dom.updateBoatsAlive(1);
-        if (dom.player1.allSunk() !== false) return dom.playerWon(2);
+        if (dom.player1.allSunk() !== false) return EventHandler.onWin(2);
       } while (hit !== false);
       dom.toggleTurn();
     }
     return false;
+  },
+  onWin(player) {
+    const dialogWin = document.querySelector('.win');
+    dialogWin.showModal();
+    const restart = dialogWin.querySelector('.restart');
+    restart.addEventListener('click', () => game.chooseGame());
+    restart.addEventListener('click', () => {
+      dialogWin.close();
+    });
+    const turns = document.querySelector('.turns');
+    turns.textContent = `Player ${player} won!!!`;
+    const winner = document.querySelector('.winner');
+    winner.textContent = `Player ${player} won!!!`;
+    winner.className = 'winner';
+    if (player === 2) {
+      winner.classList.add('two');
+    }
   },
 };
 

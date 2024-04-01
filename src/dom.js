@@ -1,4 +1,3 @@
-import game from './game';
 import EventHandler from './eventHandler';
 
 const dom = {
@@ -71,23 +70,6 @@ const dom = {
       setTimeout(resolve, ms);
     });
   },
-  playerWon(player) {
-    const dialogWin = document.querySelector('.win');
-    dialogWin.showModal();
-    const restart = dialogWin.querySelector('.restart');
-    restart.addEventListener('click', () => game.chooseGame());
-    restart.addEventListener('click', () => {
-      dialogWin.close();
-    });
-    const turns = document.querySelector('.turns');
-    turns.textContent = `Player ${player} won!!!`;
-    const winner = document.querySelector('.winner');
-    winner.textContent = `Player ${player} won!!!`;
-    winner.className = 'winner';
-    if (player === 2) {
-      winner.classList.add('two');
-    }
-  },
   toggleTurn() {
     const divTurns = document.querySelector('.turns');
     const currentTurn = divTurns.textContent.substring(7, 8);
@@ -121,7 +103,17 @@ const dom = {
 
     EventHandler.addGridListeners(player);
   },
+  prepareNewGame() {
+    const divTurns = document.querySelector('.turns');
+    divTurns.textContent = 'Player 1 turn';
+    divTurns.className = 'turns';
+    const shipsAlive = document.querySelectorAll('.ships-alive');
+    shipsAlive.forEach(div => {
+      div.textContent = 'Alive ships: 5';
+    });
+  },
   showStartingDialog(player1, player2) {
+    dom.prepareNewGame();
     dom.populateGrid(player1.getGrid(), true);
     const dialogPlace = document.querySelector('.place-ships');
     dialogPlace.showModal();
