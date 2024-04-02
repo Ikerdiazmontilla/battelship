@@ -485,10 +485,11 @@ h2{
    }
  
    .place-ships .boats-drag {
-     width: 80vw;
-     flex-direction: row;
-     flex-wrap: wrap;
-     justify-content: center;
+    display: none;
+   }
+
+   #direction {
+      display: none;
    }
  
    .place-ships .boats-drag.vertical {
